@@ -1,8 +1,6 @@
 package com.example.simplespringv2.student;
 
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -66,5 +64,13 @@ public class StudentService { //spring bean
 		if(studentByEmail.isPresent()) {
 			throw new IllegalStateException("email taken");
 		}
+	}
+
+
+
+	public Student findStudentById(Long id) {
+		return studentRepository.findStudentById(id).orElseThrow(
+				() -> new IllegalStateException("id not found")
+		);
 	}
 }
