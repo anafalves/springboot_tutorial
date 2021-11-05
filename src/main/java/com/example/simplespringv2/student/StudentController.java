@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="api/students")
+@CrossOrigin(origins = "http://localhost:4200")
 public class StudentController {
     
     private final StudentService studentService;
@@ -27,6 +28,10 @@ public class StudentController {
 //        return studentService.getStudents();
 //	}
 
+//	@DeleteMapping(path="{studentId}")
+//	public void deleteStudent(@PathVariable("studentId") Long id){
+//		studentService.deleteStudent(id);
+//	}
 
 
 	@PostMapping
@@ -34,10 +39,6 @@ public class StudentController {
 		studentService.addNewStudent(student);
 	}
 
-	@DeleteMapping(path="{studentId}")
-	public void deleteStudent(@PathVariable("studentId") Long id){
-		studentService.deleteStudent(id);
-	}
 
 	@PutMapping(path = "{studentId}")//does not need queries
 	public void updateStudent(@PathVariable("studentId") Long id,
@@ -49,16 +50,19 @@ public class StudentController {
 
 	@GetMapping("/students")
 	//@CrossOrigin(originPatterns = "*")
-	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<List<Student>>getStudents(){
+	public ResponseEntity<List<Student>> getStudents(){
 		return new ResponseEntity<> (studentService.getStudents(), HttpStatus.OK);
 	}
 
-	@GetMapping("/students/{id}")
-	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Student>getStudentById(@PathVariable("id") Long id){
+	@GetMapping("/students/{studentId}")
+	public ResponseEntity<Student> getStudentById(@PathVariable("studentId") Long id){
 		return new ResponseEntity<> (studentService.findStudentById(id), HttpStatus.OK);
 	}
 
 
+	@DeleteMapping(path="/delete/{studentId}")
+	public ResponseEntity<?> deleteStudent(@PathVariable("studentId") Long id){
+		studentService.deleteStudent(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 }
