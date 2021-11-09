@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +50,6 @@ public class StudentService { //spring bean
 		);
 
 		if (email != null && name.length() > 0 && !Objects.equals(student.getEmail(), email)) {
-			confirmEmail(student);
 			student.setEmail(email);
 		}
 

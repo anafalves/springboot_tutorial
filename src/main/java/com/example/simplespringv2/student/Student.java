@@ -59,7 +59,7 @@ public class Student {
 
     public String getEmail() {
         if (this.email == null)
-            this.email = "fake@email.com";
+            this.email = "fake"+getId()+1+"@email.com";
         return email;
     }
 

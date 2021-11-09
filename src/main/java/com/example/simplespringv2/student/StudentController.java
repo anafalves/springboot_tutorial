@@ -67,18 +67,13 @@ public class StudentController {
 	}
 
 
-
-
-
 	//@PostMapping("/add")
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> registerNewStudent(
-
-
-			@RequestBody Student student){
+	public ResponseEntity<?> registerNewStudent(@RequestBody Student student){
 		studentService.addNewStudent(student);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
+
 
 	@PutMapping("/update")
 	public ResponseEntity<?> updateStudent(@RequestBody Student student){
