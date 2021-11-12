@@ -70,6 +70,7 @@ public class StudentController {
 	//@PostMapping("/add")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> registerNewStudent(@RequestBody Student student){
+		System.out.println("********************"+student);
 		studentService.addNewStudent(student);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
